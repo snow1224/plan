@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="index.css" type="text/css"> 
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWj2aCAeUMmdbV58CcU9ZsxKj8Gzcu3_A&callback=initMap"
+  type="text/javascript"></script>   
+      <script type="text/javascript">
+      var initialize = function()  {
+        var directionsDisplay = new google.maps.DirectionsRenderer;  
+        var directionsService = new google.maps.DirectionsService;   
+        var mapOptions = {
+          center: { lat: 24.325113, lng: 120.684713},   
+          zoom: 17,   
+          mapTypeId: 'satellite'
+        };
+        var map = new google.maps.Map(    
+            document.getElementById('map'),
+            mapOptions); 
+        ////////////////////////position field//////////////////
+        var carroad={
+            position:{lat:24.324684, lng:120.685329},   //24.324684, 120.685329
+            title:'接駁車停車道',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        };
+        var ticket={
+            position:{lat:24.324769, lng:120.684729},   //24.324769, 120.684729
+            title:'售票亭',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        };
+        var check={
+            position:{lat:24.324400, lng:120.684654},   //24.324400, 120.684654
+            title:'驗票口',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        };
+        var smartafr={
+            position:{lat:24.324932, lng:120.681802},  //24.324932, 120.681802
+            title:'智農館',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        };
+        var natual={
+            position:{lat:24.324534, lng:120.683086},   // 24.324534, 120.683086
+            title:'樂農館',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        };
+        var beewaveshow={
+            position:{lat:24.326326, lng:120.681507},   //24.326326, 120.681507
+            title:'蜂巢劇場',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+            
+        };
+        var acativeArea={
+            position:{lat:24.325228, lng:120.683361},  // 24.325228, 120.683361
+            title:'花漾舞春風蝶影越森悠',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/flower.png"
+        };
+        var lifeflower={
+            position:{lat:24.325755,lng:120.682412},  // 24.325755, 120.682412
+            title:'生命之花',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/flower.png"
+        };
+        var innersqu={
+            position:{lat:24.323578, lng:120.683305},   // 24.323578, 120.683305
+            title:'遊客中心',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        }
+        var bridge={
+            position:{lat:24.325121, lng:120.682646},   //24.325121, 120.682646
+            title:'埔淘塘步道',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        }
+        var waterflower={
+            position:{lat:24.325291, lng:120.682794},   //24.325291, 120.682794
+            title:'生態池水生花卉區',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/flower.png"
+        }
+        var avoidant={
+            position:{lat:24.324424, lng:120.682170},   //24.324424, 120.682170
+            title:'避無蟻香草區',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/green1.png"
+        }
+        var fertilizer={
+            position:{lat:24.325052, lng:120.681143},   //24.325052, 120.681143
+            title:'餘樂共享',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        }
+        var localplant={
+            position:{lat:24.326064, lng:120.682141},   //24.326064, 120.682141
+            title:'台灣民俗植物百寶箱',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/green1.png"
+        }
+        var tiger={
+            position:{lat:24.324614, lng:120.684793},   //24.324614, 120.684793
+            title:'虎家莊廣場',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        }
+        var tiger_fa={
+            position:{lat:24.323783, lng:120.683635},   //24.323783, 120.683635
+            title:'樂耕虎爸',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        }
+        var full={
+            position:{lat:24.324409, lng:120.683654},   //24.324409, 120.683654
+            title:'豐饒廣場',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        }
+        var check_2={
+            position:{lat:24.324270, lng:120.683258},   //24.324270, 120.683258
+            title:'驗票口',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        };
+        var market={
+            position:{lat:24.323380, lng:120.682818},   //24.323380, 120.682818
+            title:'好農市場',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/green1.png"
+        };
+        var market_exhibit={
+            position:{lat:24.323395, lng:120.682676},   //24.323395, 120.682676
+            title:'好農市集內廣場',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/green1.png"
+        };  
+        var farm_workspace={
+            position:{lat:24.322929, lng:120.681931},   //24.322929, 120.681931
+            title:'農莊工作坊',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/green1.png"
+        }; 
+        var recycle={
+            position:{lat:24.323368, lng:120.681913},   //24.323368, 120.681913
+            title:'環保一條龍',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        };
+        var food_rest={
+            position:{lat:24.325816, lng:120.681529},   //24.325816, 120.681529
+            title:'實在滿足歇腳亭',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        };
+        var friendly_agri={
+            position:{lat:24.325615, lng:120.680979},   //24.325615, 120.680979
+            title:'友善農業區',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/green1.png"
+        };
+        var wall={
+            position:{lat:24.326120, lng:120.681703},   //24.326120, 120.681703
+            title:'田園景牆',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        };
+        var small_rest={
+            position:{lat:24.326370, lng:120.682142},   //24.326370, 120.682142
+            title:'小農休憩帶',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        };  
+        var flower_road={
+            position:{lat:24.326458,lng:120.682371},  // 24.326458, 120.682371
+            title:'攀果花廊',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/flower.png"
+        };
+        var taiwan_flower={
+            position:{lat:24.326531,lng:120.682126},  // 24.326531, 120.682126
+            title:'台灣花尚蓋媠',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/flower.png"
+        };
+        var brige_2={
+            position:{lat:24.325790, lng:120.682916},   //24.325790, 120.682916
+            title:'竹編跨橋',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        };
+        var tea_diy={
+            position:{lat:24.326460, lng:120.682659},   //24.326460, 120.682659
+            title:'桂花好茶DIY工作坊',
+            map:map,
+            icon:"https://ssw.cs.pu.edu.tw/~ssw/img/point.png"
+        };
+        var positions=[carroad,ticket,check,natual,smartafr,avoidant,acativeArea,innersqu,beewaveshow,bridge,fertilizer,localplant,lifeflower,tiger,tiger_fa,full,check_2,market,market_exhibit,farm_workspace,recycle,food_rest,friendly_agri,wall,small_rest,flower_road,taiwan_flower,brige_2,tea_diy];
+        var markers=new Array();
+        for(var i = 0 ;i<positions.length;i++){
+            markers=new google.maps.Marker(positions[i]);
+        }
+          //
+        //----the tmp point-----
+        ///  road1  ////
+        var pt1={lat:24.324879,lng:120.685159};   //24.324879, 120.685159
+        var pt2={lat:24.324577,lng:120.684662};   //24.324577, 120.684662
+        var pt3={lat:24.324355,lng:120.684643};   //24.324355, 120.684643
+        var road1=[carroad.position,pt1,pt2,check.position,pt3];
+        var road01=[carroad.position,pt1,pt2];
+        ///  road1 /////
+        /// turn right ///
+        var pt4_1={lat:24.324036,lng:120.683940};   //24.324036, 120.683940
+        var pt4_2={lat:24.324044,lng:120.683761};   //24.324044, 120.683761
+        var pt4_3={lat:24.324068,lng:120.683554};   //24.324068, 120.683554
+        var pt4_4={lat:24.324158,lng:120.683401};   //24.324158, 120.683401
+        var road2=[pt3,pt4_1,pt4_2,pt4_3,pt4_4];
+        var road1to2=[pt2,check.position,pt3,pt4_1,pt4_2,pt4_3,pt4_4];
+        /// turn right ///
+        /// big circle -- right ///
+        var pt5_1={lat:24.324313,lng:120.683608};   //24.324313, 120.683608
+        var pt5_2={lat:24.324542,lng:120.683681};   //24.324542, 120.683681
+        var pt5_3={lat:24.324713,lng:120.683672};   //24.324713, 120.683672
+        var pt5_4={lat:24.324999,lng:120.683620};   //24.324999, 120.683620   brige
+        var pt5_5={lat:24.325114,lng:120.683549};   //24.325114, 120.683549
+        var road3=[pt4_4,pt5_1,pt5_2,pt5_3,pt5_4,pt5_5];
+        var road23=[pt4_4,pt5_1,pt5_2,pt5_3,pt5_4];
+        var road34=[pt5_4,pt5_5];
+        /// big circle -- right ///
+        /// small circle ///
+        var pt6_1={lat:24.325195,lng:120.683620};   //24.325195, 120.683620
+        var pt6_2={lat:24.325350,lng:120.683628};   //24.325350, 120.683628
+        var pt6_3={lat:24.325497,lng:120.683548};   //24.325497, 120.683548
+        var pt6_4={lat:24.325562,lng:120.683387};   //24.325562, 120.683387
+        var pt6_5={lat:24.325570,lng:120.683248};   //24.325570, 120.683248  
+        var pt6_6={lat:24.325439,lng:120.683088};   //24.325439, 120.683088
+        var pt6_7={lat:24.325316,lng:120.683053};   //24.325316, 120.683053   connect another road
+        var pt6_8={lat:24.325169,lng:120.683107};   //24.325169, 120.683107
+        var pt6_9={lat:24.325087,lng:120.683215};   //24.325087, 120.683215   
+        var pt6_10={lat:24.325071,lng:120.683376};   //24.325071, 120.683376
+        var road4=[pt5_5,pt6_1,pt6_2,pt6_3,pt6_4,pt6_5,pt6_6,pt6_7,pt6_8,pt6_9,pt6_10,pt5_5];
+        var road4to13=[pt5_5,pt6_1,pt6_2,pt6_3,pt6_4];
+        var road13to5=[pt6_4,pt6_5,pt6_6,pt6_7];
+        var road4to14=[pt6_9,pt6_10,pt5_5];
+        var road14to5=[pt6_7,pt6_8,pt6_9];
+        /// small circle ///
+        /// big circle left ///
+        var pt5_8={lat:24.325300,lng:120.682909};   //24.325300, 120.682909
+        var pt5_9={lat:24.325218,lng:120.682712};   //24.325218, 120.682712   connect another road
+        var pt5_10={lat:24.325103,lng:120.682578};   //24.325103, 120.682578   
+        var pt5_11={lat:24.324999,lng:120.682528};   //24.325005, 120.682528   brige
+        var pt5_12={lat:24.324866,lng:120.682429};   //24.324866, 120.682429
+        var pt5_13={lat:24.324695,lng:120.682385};   //24.324695, 120.682385   
+        var pt5_14={lat:24.324564,lng:120.682430};   //24.324564, 120.682430
+        var pt5_15={lat:24.324408,lng:120.682501};   //24.324408, 120.682501
+        var pt5_16={lat:24.324294,lng:120.682654};   //24.324294, 120.682654
+        var pt5_17={lat:24.324171,lng:120.682860};   //24.324171, 120.682860
+        var pt5_18={lat:24.324106,lng:120.683102};   //24.324106, 120.683102
+        var road5=[pt6_7,pt5_8,pt5_9,pt5_10,pt5_11,pt5_12,pt5_13,pt5_14,pt5_15,pt5_16,pt5_17,pt5_18,pt4_4];
+        var road29=[pt4_4,pt5_18];
+        var road5to6=[pt6_7,pt5_8,pt5_9];
+        var road6to8=[pt5_9,pt5_10,pt5_11];
+        
+        /// big circle left ///
+        ///  brige 步道  ///
+        var road6=[pt5_11,pt5_4];
+        ///  brige 步道  ///
+        /// 下面直角道路  ///
+        var pt7_1={lat:24.324140,lng:120.682948};   //24.324140, 120.682948
+        var pt7_2={lat:24.323607,lng:120.682892};   //24.323607, 120.682892
+        var pt7_3={lat:24.323502,lng:120.682125};   //24.323502, 120.682125  
+        var road7=[pt7_1,pt7_2,pt7_3];
+        var road57=[pt6_7,pt5_8,pt5_9,pt5_10,pt5_11,pt5_12,pt7_1];
+        var road9to10=[pt7_1,pt7_2];
+        var road10to11=[pt7_2,pt7_3];
+        var road8to9=[pt5_11,pt5_12,pt5_13,pt5_14,pt5_15,pt5_16,pt5_17,pt7_1];
+        /// 下面直角道路  ///
+        /// 下面彎曲道路  ///
+        var pt8_1={lat:24.323664,lng:120.682256};   //24.323664, 120.682256
+        var pt8_2={lat:24.323567,lng:120.682405};   //24.323567, 120.682405
+        var pt8_3={lat:24.323455,lng:120.682616};   //24.323455, 120.682616
+        var pt8_4={lat:24.323350,lng:120.682661};   //24.323350, 120.682661
+        var pt8_5={lat:24.323237,lng:120.682618};   //24.323237, 120.682618
+        var pt8_6={lat:24.323237,lng:120.681869}   //24.323237, 120.681869
+    //    var road8=[pt8_1,pt8_2,pt8_3,pt8_4,pt8_5,pt8_6];
+        /// 下面彎曲道路  ///
+        ///  上面靠近生命之花那條  ///
+        var pt9_1={lat:24.325806,lng:120.682634};   //24.325806, 120.682634
+        var pt9_2={lat:24.325937,lng:120.682520};   //24.325937, 120.682520
+        var pt9_3={lat:24.325937,lng:120.682383};   //24.325937, 120.682383
+        var pt9_4={lat:24.325857,lng:120.682264};   //24.325857, 120.682264
+        var pt9_5={lat:24.325783,lng:120.682227};   //24.325783, 120.682227  connect another road
+        var pt9_6={lat:24.325697,lng:120.682208};   //24.325697, 120.682208
+        var pt9_7={lat:24.325606,lng:120.682202};   //24.325606, 120.682202
+        var pt9_8={lat:24.325526,lng:120.682183};   //24.325526, 120.682183  
+        var pt9_9={lat:24.325423,lng:120.682121};   //24.325423, 120.682121
+        var road9=[pt5_9,pt9_1,pt9_2,pt9_3,pt9_4,pt9_5,pt9_6,pt9_7,pt9_8,pt9_9];
+          
+       
+          
+        var pt10_1={lat:24.325846,lng:120.682111};   //24.325846, 120.682111
+        var pt10_2={lat:24.325914,lng:120.682005};   //24.325914, 120.682005
+        var pt10_3={lat:24.326005,lng:120.681956};   //24.326005, 120.681956
+        var pt10_4={lat:24.326142,lng:120.681943};   //24.326142, 120.681943
+        var road10=[pt9_5,pt10_1,pt10_2,pt10_3,pt10_4];
+        var road6to16=[pt5_9,pt9_1];
+        ///  上面靠近生命之花那條  ///
+        /// 上面中間那條 ////
+        var pt11_1={lat:24.326162,lng:120.682735};   //24.326162, 120.682735
+        var pt11_2={lat:24.326307,lng:120.682664};   //24.326307, 120.682664
+        var pt11_3={lat:24.326428,lng:120.682541};   //24.326428, 120.682541
+        var pt11_4={lat:24.326494,lng:120.682373};   //24.326494, 120.682373
+        var pt11_5={lat:24.326477,lng:120.682151};   //24.326477, 120.682151
+        var pt11_6={lat:24.326568,lng:120.682021};   //24.326568, 120.682021
+        var pt11_7={lat:24.326585,lng:120.681888};   //24.326585, 120.681888
+        var pt11_8={lat:24.326569,lng:120.681729};   //24.326569, 120.681729
+        var road11=[pt9_1,pt11_1,pt11_2,pt11_3,pt11_4,pt11_5,pt11_6,pt11_7,pt11_8];
+        /// 上面中間那條 ////
+        ///  上面右邊   ///
+        var pt12_1={lat:24.325797,lng:120.682793};   //24.325797, 120.682793
+        var pt12_2={lat:24.325983,lng:120.682908};   //24.325983, 120.682908
+        var pt12_3={lat:24.326128,lng:120.682908};   //24.326128, 120.682908
+        var pt12_4={lat:24.326306,lng:120.682855};   //24.326306, 120.682855
+        var pt12_5={lat:24.326443,lng:120.682802};   //24.326443, 120.682802
+        var pt12_6={lat:24.326590,lng:120.682744};   //24.326590, 120.682744
+        var pt12_7={lat:24.326697,lng:120.682588};   //24.326697, 120.682588
+        var pt12_8={lat:24.326739,lng:120.682376};   //24.326739, 120.682376
+        var pt12_9={lat:24.326757,lng:120.682093};   //24.326757, 120.682093
+        var pt12_10={lat:24.326725,lng:120.681880};   //24.326725, 120.681880
+        var pt12_11={lat:24.326843,lng:120.681732};   //24.326843, 120.681732
+        var pt12_12={lat:24.326886,lng:120.681581};   //24.326886, 120.681581
+        var pt12_13={lat:24.326888,lng:120.681421};   //24.326888, 120.681421
+        var pt12_14={lat:24.326797,lng:120.681250};   //24.326797, 120.681250
+        var pt12_15={lat:24.326706,lng:120.681133};   //24.326706, 120.681133
+        var pt12_16={lat:24.326564,lng:120.681097};   //24.326564, 120.681097
+        var pt12_17={lat:24.326383,lng:120.681113};   //24.326383, 120.681113
+        var road12=[pt5_9,pt12_1,pt12_2,pt12_3,pt12_4,pt12_5,pt12_6,pt12_7,pt12_8,pt12_9,pt12_10,pt12_11,pt12_12,pt12_13,pt12_14,pt12_15,pt12_16,pt12_17];
+        var road67=[pt5_9,pt12_1,pt12_2,pt12_3,pt12_4,pt12_5,pt12_6,pt12_7,pt12_8];
+        var road6to15=[pt5_9,pt12_1,pt12_2,pt12_3,pt12_4];
+        var road15to7=[pt12_4,pt12_5,pt12_6,pt12_7,pt12_8];
+         var road16to7=[pt9_1,pt11_1,pt11_2,pt11_3,pt11_4,pt11_5,pt12_8];
+        var road7to12=[pt12_8,pt12_9,pt12_10,pt12_11,pt12_12,pt12_13,pt12_14,pt12_15,pt12_16,pt12_17];
+        ///  上面右邊   ///
+        var paths=[road1,road2,road3,road4,road5,road6,road7,road9,road10,road11,road12,road16to7];  //,road8
+
+        ////////////////////////////////////////////////////////
+        ///////////////draw line (idealy, be a road)////////////
+          var roads=new Array(15);
+          for(var i=0;i<paths.length;i++){
+                  roads[i] = new google.maps.Polyline({
+                  path:paths[i],
+                  geodesic: true,
+                  strokeColor: '#FFF',
+                  strokeOpacity: 0.7,
+                  strokeWeight: 10,
+                  map:map
+              });
+              roads[i].path=paths[i];
+          }
+        //////////////////////////////////////////////////////////
+          ////////gragh element//////////
+          function gpoint(){
+             var data=0,path=[];
+             this.data=data;
+             this.path=path;
+             this.setData = function(value){
+                 data=value;
+                 this.data=data;
+             }
+             this.setPath = function(value){
+                 path=value;
+                 this.path=path;
+             }
+          }
+          ///////////////////////////
+        //////////////////build map gragh      ///////////////////
+        var gragh = new Array(18);
+        for(var i=0;i<18;i++){
+            gragh[i]=new Array(18);
+            for(var j=0;j<18;j++){
+                gragh[i][j]=new gpoint();
+            }
+        }
+        var gpath=[road01,road1to2,road23,road29,road34,road6,road67,road29,road7,road12];
+        gragh[0][0].data=1;  gragh[0][0].path=road01; // gragh[0].pos='24.324684, 120.685329';
+        gragh[1][0].data=0;  gragh[1][0].path=road01;  
+        gragh[1][1].data=2;  gragh[1][1].path=road1to2; 
+        gragh[2][0].data=1;  gragh[2][0].path=road1to2;       
+        gragh[2][1].data=3;  gragh[2][1].path=road23; 
+        gragh[2][2].data=9;  gragh[2][2].path=road29;
+        gragh[3][0].data=2;  gragh[3][0].path=road23;
+        gragh[3][1].data=4;  gragh[3][1].path=road34;   
+        gragh[3][2].data=8;  gragh[3][2].path=road6;
+        gragh[4][0].data=13; gragh[4][0].path=road4to13; 
+        gragh[4][1].data=14; gragh[4][1].path=road4to14;
+        gragh[4][2].data=3;  gragh[4][2].path=road34;
+        gragh[13][0].data=5; gragh[13][0].path=road13to5;
+        gragh[13][1].data=4; gragh[13][1].path=road4to13;
+        gragh[14][0].data=5; gragh[14][0].path=road14to5;
+        gragh[14][1].data=4; gragh[14][1].path=road4to14;
+        gragh[5][0].data=6;  gragh[5][0].path=road5to6;
+        gragh[5][1].data=13; gragh[5][1].path=road13to5;
+        gragh[5][2].data=14; gragh[5][2].path=road14to5;
+        gragh[6][0].data=15; gragh[6][0].path=road6to15;
+        gragh[6][1].data=16; gragh[6][1].path=road6to16;
+        gragh[6][2].data=5;  gragh[6][2].path=road5to6;
+        gragh[6][3].data=8;  gragh[6][3].path=road6to8; 
+        gragh[17][0].data=15;  gragh[17][0].path=road6to15; //6'
+        gragh[17][1].data=16;  gragh[17][1].path=road6to16;
+        gragh[17][2].data=5;   gragh[17][2].path=road5to6;
+        gragh[17][3].data=8;   gragh[17][3].path=road6to8;//
+        gragh[15][0].data=7;   gragh[15][0].path=road15to7;
+        gragh[15][1].data=6;   gragh[15][1].path=road6to15;
+        gragh[15][2].data=17;  gragh[15][2].path=road6to15;
+        gragh[16][0].data=7;   gragh[16][0].path=road16to7;
+        gragh[16][1].data=6;   gragh[16][1].path=road6to16;
+        gragh[16][2].data=17;  gragh[16][2].path=road6to16;
+        gragh[7][0].data=15;   gragh[7][0].path=road15to7;
+        gragh[7][1].data=16;   gragh[7][1].path=road16to7;
+        gragh[7][2].data=12;   gragh[7][2].path=road7to12;
+        gragh[8][0].data=3;    gragh[8][0].path=road6;
+        gragh[8][1].data=6;    gragh[8][1].path=road6to8;
+        gragh[8][2].data=9;    gragh[8][2].path=road8to9;
+        gragh[9][0].data=2;    gragh[9][0].path=road29;
+        gragh[9][1].data=8;    gragh[9][1].path=road8to9;
+        gragh[9][2].data=10;   gragh[9][2].path=road9to10;
+        gragh[10][0].data=9;   gragh[10][0].path=road9to10;
+        gragh[10][1].data=11;  gragh[10][1].path=road10to11;
+        gragh[12][0].data=7;   gragh[12][0].path=road7to12;
+        /////////////////////////////////////////////////////////
+        ///////////////////     分區     ////////////////////////
+        var part1=[gragh[0],gragh[1],gragh[2]];
+        var part2=[gragh[2],gragh[3],gragh[4],gragh[13],gragh[14],gragh[5],gragh[6],gragh[15],gragh[7],gragh[16],gragh[8],gragh[9]];
+        var part3=[gragh[9],gragh[10],gragh[11]];
+        var part4=[gragh[12]];
+        var allpart=[part1,part2,part3,part4];
+        
+          ///test///
+       //   if(gragh[0]===gragh[0]){
+       //       alert('is gragh[0]');
+       //   }   okay
+          ////////// 
+        /////////////////////////////////////////////////////////
+        //////////////////     找漢彌爾頓路徑    ///////////////////
+        function Stack(s){
+            var items = new Array(s),len=0,size=0;
+            var ls=[];
+            var index=0;
+            this.len = len;
+            this.size = s;
+            this.isFull = function(){
+                if(this.len===this.size){ 
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+            this.push = function(datavalue){
+                if(!this.isFull()){
+      //              alert('push done');
+                    items[this.len]=new Point(datavalue);
+                    len++;
+                    this.len=len;
+                    
+                    return true;
+                }else{
+                    alert('push flase');
+                    return false;
+                }
+            }
+            this.pop = function(){
+                if(!this.isEmpty()){
+                     len--;
+			         this.len=len;
+			         var temp = items;
+			         items[len] = null;
+			         return temp;
+		          }
+		          return null;
+            }
+            this.peek = function(){
+                if(!this.isEmpty()){
+                    return items[this.len -1];
+                }else{
+                    return null;
+                }
+            }
+            this.isEmpty = function(){
+                return this.len == 0;
+            }
+            this.clear = function(){
+                len=0;
+                this.len=0;
+                return items= [] ;
+            }
+            this.setPathRecord = function(){
+                for(var i=0;i<items.length;i++){
+                    ls[index]=new Object();
+                    ls[index++]=items[i].path;
+                }
+            }
+            this.print = function(){
+                var str = '';
+                for(var i=0;i<len-1;i++){
+                   if(items[i].data!==17)
+                        str += items[i].data + ' -> ';
+                    else
+                        str += '6\' -> '; 
+                }
+                str += items[len-1].data;
+       //         alert(typeof(this.container));
+                return str;
+            }
+            function Point(value){
+                var data,record=0;
+                this.data = value;
+                this.record=record;
+                this.addRecord = function(){
+                    record++;
+                    this.record=record;
+                }
+            } 
+        }
+        var sta = new Stack(16);
+        var rec = new Array(18);  //record the point to path
+        var have = new Array(18);
+        for(var i=0;i<18;i++){
+            rec[i]=0;
+            have[i]=0;
+        }
+        rec[0]=1;
+        rec[1]=2;
+        rec[2]=3;
+        rec[3]=3;
+        rec[4]=3;
+        rec[5]=3;
+        rec[6]=4;
+        rec[17]=4; //6'
+        rec[13]=2;
+        rec[14]=2;
+        rec[15]=3;
+        rec[16]=3;
+        rec[7]=2;
+        rec[8]=3;
+        rec[9]=3;
+        rec[10]=2;
+        rec[11]=1;
+          var result = new Stack(16);
+          var list = [];
+        //////////////////////////////////////////////////////////
+          directionsDisplay.setPanel(document.getElementById("panel"));   
+          var start = document.getElementById('start').value;
+   
+          var onChangeHandler = function() {
+           calculateAndDisplayRoute(gragh,gpath,map,rec,sta,have,result,list);
+            };
+          document.getElementById('start').addEventListener('change', onChangeHandler);
+          document.getElementById('end').addEventListener('change', onChangeHandler);
+    //      document.getElementById('clear').addEventListener('click',clearpath);  
+          
+          
+      }
+    function hamiltonian(sta,record,gragh,have,rec,result,map,start,list){
+        sta.push(start);     
+        have[start]=1;
+        var index=0;
+        while(!sta.isEmpty()){
+            if(sta.isFull()){
+                alert(sta.print());
+                have[sta.peek().data]=1;
+                result.clear();
+                sta.clear();
+            }  
+            else if(sta.peek().record===rec[sta.peek().data]){
+                have[sta.peek().data]=1;
+                sta.pop();
+                result.pop();
+                list[list.length-1].setMap(null);
+            }else{
+                var next = gragh[sta.peek().data][sta.peek().record].data;
+                var nextpath = gragh[sta.peek().data][sta.peek().record].path;
+                if(have[next]===0){
+                    sta.peek().addRecord();
+                    sta.push(next);
+                    result.push(nextpath);
+                    have[next]=1;
+                    list.push(new google.maps.Polyline({
+                        path:nextpath,
+                        geodesic: true,
+                        strokeColor: '#A0A',
+                        strokeOpacity: 0.3,
+                        stokeWeight: 10,
+                        map:map
+                    }));
+                }else{
+                    sta.peek().addRecord();
+                }
+            }
+        }
+        alert('done');
+        
+    }
+    function calculateAndDisplayRoute(gragh,gpath,map,rec,sta,have,result,list) {
+        var start = document.getElementById('start').value;
+    //    var end = document.getElementById('end').value;
+            
+            if(start=="24.324684, 120.685329"){
+                hamiltonian(sta,rec,gragh,have,rec,result,map,0,list);
+            }else if(start=="24.324400, 120.684654" ){ 
+                hamiltonian(sta,rec,gragh,have,rec,result,map,1,list);
+            }else if(start=="24.324534, 120.683086"){
+                hamiltonian(sta,rec,gragh,have,rec,result,map,2,list);
+            }else if(start=="24.325228, 120.683361"){
+                hamiltonian(sta,rec,gragh,have,rec,result,map,5,list);
+            }else if(start=="24.325228, 120.683361"){
+                hamiltonian(sta,rec,gragh,have,rec,result,map,16,list);
+            }else if(start=="24.325755, 120.682412"){
+                hamiltonian(sta,rec,gragh,have,rec,result,map,3,list);
+            }else if(start=="24.325121, 120.682646"){
+                hamiltonian(sta,rec,gragh,have,rec,result,map,6,list);
+            }else if(start=="24.324932, 120.681802"){
+                hamiltonian(sta,rec,gragh,have,rec,result,map,7,list);
+            }else if(start=="24.326326, 120.681507"){
+                hamiltonian(sta,rec,gragh,have,rec,result,map,12,list);
+            }
+            
+    
+      }
+    </script>
+</head>
+<body onload="initialize()">
+  <div id="map"></div>
+  <div id="panel" ></div>
+  <div id="floating-panel">
+      <strong>Start:</strong>
+      <select id="start">
+        <option value="#">請選擇</option>
+        <option value="24.324684, 120.685329">接駁車停車道</option>
+        <option value="24.324400, 120.684654">售票亭(右)</option>
+        <option value="24.324534, 120.683086">樂農館</option>
+        <option value="24.325228, 120.683361">花漾舞春風蝶影越森悠</option>
+        <option value="24.325755, 120.682412">生命之花</option>
+        <option value="24.325121, 120.682646">埔淘塘步道</option>
+        <option value="24.325816, 120.681529">實在滿足歇腳亭</option>
+        <option value="24.324932, 120.681802">智農館</option>
+        <option value="24.326326, 120.681507">蜂巢劇場</option>
+      </select>
+      
+      <strong>End:</strong>
+      <select id="end">
+        <option value="#">請選擇</option>
+        <option value="24.324684, 120.685329">接駁車停車道</option>
+        <option value="24.324400, 120.684654">售票亭(右)</option>
+        <option value="24.324534, 120.683086">樂農館</option>
+        <option value="24.325228, 120.683361">花漾舞春風蝶影越森悠</option>
+        <option value="24.325755, 120.682412">生命之花</option>
+        <option value="24.325121, 120.682646">埔淘塘步道</option>
+        <option value="24.325816, 120.681529">實在滿足歇腳亭</option>
+        <option value="24.324932, 120.681802">智農館</option>
+        <option value="24.326326, 120.681507">蜂巢劇場</option>
+      </select>
+  </div>
+  <a href="javascript:window.location.reload()">重新整理</a>
+</body>
+</html>
