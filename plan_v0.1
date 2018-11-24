@@ -386,10 +386,10 @@
             }
         }
         var gpath=[road01,road1to2,road23,road29,road34,road6,road67,road29,road7,road12];
-        gragh[0][0].data=1;  gragh[0][0].path=road01; // gragh[0].pos='24.324684, 120.685329';
-        gragh[1][0].data=0;  gragh[1][0].path=road01;  
+        gragh[0][0].data=1;  gragh[0][0].path=road01;  gragh[0].pos='24.324684, 120.685329';
+        gragh[1][0].data=0;  gragh[1][0].path=road01;  gragh[1].pos='24.324400, 120.684654';
         gragh[1][1].data=2;  gragh[1][1].path=road1to2; 
-        gragh[2][0].data=1;  gragh[2][0].path=road1to2;       
+        gragh[2][0].data=1;  gragh[2][0].path=road1to2;    gragh[2].pos='24.324534, 120.683086';   
         gragh[2][1].data=3;  gragh[2][1].path=road23; 
         gragh[2][2].data=9;  gragh[2][2].path=road29;
         gragh[3][0].data=2;  gragh[3][0].path=road23;
@@ -402,7 +402,7 @@
         gragh[13][1].data=4; gragh[13][1].path=road4to13;
         gragh[14][0].data=5; gragh[14][0].path=road14to5;
         gragh[14][1].data=4; gragh[14][1].path=road4to14;
-        gragh[5][0].data=6;  gragh[5][0].path=road5to6;
+        gragh[5][0].data=6;  gragh[5][0].path=road5to6;  gragh[5].pos='24.325228, 120.683361'; 
         gragh[5][1].data=13; gragh[5][1].path=road13to5;
         gragh[5][2].data=14; gragh[5][2].path=road14to5;
         gragh[6][0].data=15; gragh[6][0].path=road6to15;
@@ -416,7 +416,7 @@
         gragh[15][0].data=7;   gragh[15][0].path=road15to7;
         gragh[15][1].data=6;   gragh[15][1].path=road6to15;
         gragh[15][2].data=17;  gragh[15][2].path=road6to15;
-        gragh[16][0].data=7;   gragh[16][0].path=road16to7;
+        gragh[16][0].data=7;   gragh[16][0].path=road16to7;   gragh[16].pos='24.325228, 120.683361'; 
         gragh[16][1].data=6;   gragh[16][1].path=road6to16;
         gragh[16][2].data=17;  gragh[16][2].path=road6to16;
         gragh[7][0].data=15;   gragh[7][0].path=road15to7;
@@ -560,8 +560,6 @@
             };
           document.getElementById('start').addEventListener('change', onChangeHandler);
           document.getElementById('end').addEventListener('change', onChangeHandler);
-    //      document.getElementById('clear').addEventListener('click',clearpath);  
-          
           
       }
     function hamiltonian(sta,record,gragh,have,rec,result,map,start,list){
@@ -606,7 +604,7 @@
     }
     function calculateAndDisplayRoute(gragh,gpath,map,rec,sta,have,result,list) {
         var start = document.getElementById('start').value;
-    //    var end = document.getElementById('end').value;
+        var end = document.getElementById('end').value;
             
             if(start=="24.324684, 120.685329"){
                 hamiltonian(sta,rec,gragh,have,rec,result,map,0,list);
@@ -616,11 +614,11 @@
                 hamiltonian(sta,rec,gragh,have,rec,result,map,2,list);
             }else if(start=="24.325228, 120.683361"){
                 hamiltonian(sta,rec,gragh,have,rec,result,map,5,list);
-            }else if(start=="24.325228, 120.683361"){
-                hamiltonian(sta,rec,gragh,have,rec,result,map,16,list);
             }else if(start=="24.325755, 120.682412"){
-                hamiltonian(sta,rec,gragh,have,rec,result,map,3,list);
+                hamiltonian(sta,rec,gragh,have,rec,result,map,16,list);
             }else if(start=="24.325121, 120.682646"){
+                hamiltonian(sta,rec,gragh,have,rec,result,map,3,list);
+            }else if(start=="24.325816, 120.681529"){
                 hamiltonian(sta,rec,gragh,have,rec,result,map,6,list);
             }else if(start=="24.324932, 120.681802"){
                 hamiltonian(sta,rec,gragh,have,rec,result,map,7,list);
