@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <link rel="stylesheet" href="index.css" type="text/css"> 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWj2aCAeUMmdbV58CcU9ZsxKj8Gzcu3_A&callback=initMap"
-  type="text/javascript"></script>   
+  type="text/javascript"></script> 
+       
       <script type="text/javascript">
       var initialize = function()  {
         var directionsDisplay = new google.maps.DirectionsRenderer;  
@@ -261,7 +262,7 @@
         var pt5_17={lat:24.324171,lng:120.682860};   //24.324171, 120.682860
         var pt5_18={lat:24.324106,lng:120.683102};   //24.324106, 120.683102
         var road5=[pt6_7,pt5_8,pt5_9,pt5_10,pt5_11,pt5_12,pt5_13,pt5_14,pt5_15,pt5_16,pt5_17,pt5_18,pt4_4];
-        var road29=[pt4_4,pt5_18];
+        
         var road5to6=[pt6_7,pt5_8,pt5_9];
         var road6to8=[pt5_9,pt5_10,pt5_11];
         
@@ -278,6 +279,7 @@
         var road9to10=[pt7_1,pt7_2];
         var road10to11=[pt7_2,pt7_3];
         var road8to9=[pt5_11,pt5_12,pt5_13,pt5_14,pt5_15,pt5_16,pt5_17,pt7_1];
+        var road29=[pt4_4,pt5_18,pt7_1];
         /// 下面直角道路  ///
         /// 下面彎曲道路  ///
         var pt8_1={lat:24.323664,lng:120.682256};   //24.323664, 120.682256
@@ -361,6 +363,14 @@
               });
               roads[i].path=paths[i];
           }
+      /*    var test=new google.maps.Polyline({
+                  path:road10to11,
+                  geodesic: true,
+                  strokeColor: '#569',
+                  strokeOpacity: 0.7,
+                  strokeWeight: 10,
+                  map:map
+              });*/
         //////////////////////////////////////////////////////////
           ////////gragh element//////////
           function gpoint(){
@@ -419,9 +429,10 @@
         gragh[16][0].data=7;   gragh[16][0].path=road16to7;   gragh[16].pos='24.325228, 120.683361'; 
         gragh[16][1].data=6;   gragh[16][1].path=road6to16;
         gragh[16][2].data=17;  gragh[16][2].path=road6to16;
-        gragh[7][0].data=15;   gragh[7][0].path=road15to7;
+        gragh[7][2].data=15;   gragh[7][0].path=road15to7;
         gragh[7][1].data=16;   gragh[7][1].path=road16to7;
-        gragh[7][2].data=12;   gragh[7][2].path=road7to12;
+          ////107/12/03  更改gragh[7]順序
+        gragh[7][0].data=12;   gragh[7][2].path=road7to12;
         gragh[8][0].data=3;    gragh[8][0].path=road6;
         gragh[8][1].data=6;    gragh[8][1].path=road6to8;
         gragh[8][2].data=9;    gragh[8][2].path=road8to9;
@@ -433,11 +444,15 @@
         gragh[12][0].data=7;   gragh[12][0].path=road7to12;
         /////////////////////////////////////////////////////////
         ///////////////////     分區     ////////////////////////
+        
         var part1=[gragh[0],gragh[1],gragh[2]];
         var part2=[gragh[2],gragh[3],gragh[4],gragh[13],gragh[14],gragh[5],gragh[6],gragh[15],gragh[7],gragh[16],gragh[8],gragh[9]];
         var part3=[gragh[9],gragh[10],gragh[11]];
-        var part4=[gragh[12]];
+        var part4=[gragh[12],gragh[7]];
+        var part5=[gragh[6],gragh[15],gragh[7],gragh[16]]
         var allpart=[part1,part2,part3,part4];
+        
+          
         
           ///test///
        //   if(gragh[0]===gragh[0]){
@@ -489,6 +504,13 @@
                     return null;
                 }
             }
+            this.back = function(){
+                if(!this.isEmpty() && this.len >= 2){
+                    return items[this.len-2]
+                }else{
+                    return null;
+                }
+            }
             this.isEmpty = function(){
                 return this.len == 0;
             }
@@ -525,7 +547,7 @@
                 }
             } 
         }
-        var sta = new Stack(16);
+        var sta = new Stack(23);
         var rec = new Array(18);  //record the point to path
         var have = new Array(18);
         for(var i=0;i<18;i++){
@@ -549,41 +571,85 @@
         rec[9]=3;
         rec[10]=2;
         rec[11]=1;
-          var result = new Stack(16);
+          var result = new Stack(23);
+          var staRec = new Stack(23);
           var list = [];
         //////////////////////////////////////////////////////////
           directionsDisplay.setPanel(document.getElementById("panel"));   
           var start = document.getElementById('start').value;
-   
+          var end = document.getElementById('end').value;
           var onChangeHandler = function() {
-           calculateAndDisplayRoute(gragh,gpath,map,rec,sta,have,result,list);
+           calculateAndDisplayRoute(gragh,gpath,map,rec,sta,have,result,list,staRec);
             };
           document.getElementById('start').addEventListener('change', onChangeHandler);
           document.getElementById('end').addEventListener('change', onChangeHandler);
           
       }
-    function hamiltonian(sta,record,gragh,have,rec,result,map,start,list){
-        sta.push(start);     
+    function hamiltonian(sta,record,gragh,have,rec,result,map,start,list,staRec){
+        sta.push(start);   
+        
+        staRec.push(start);
         have[start]=1;
         var index=0;
+        var ifback = 0; // 判斷有沒有返回
         while(!sta.isEmpty()){
-            if(sta.isFull()){
+            
+            if(sta.isFull() ){
+                if(sta.peek().data==gragh[start][0]||sta.peek().data==gragh[start][1]||sta.peek().data==gragh[start][2]){
+				    alert(sta.print());
+                    have[sta.peek().data]=1;
+				}
                 alert(sta.print());
-                have[sta.peek().data]=1;
-                result.clear();
-                sta.clear();
+                 result.clear();
+                alert('staRec: '+staRec.print());
+                 sta.pop();
+                 staRec.pop();
             }  
-            else if(sta.peek().record===rec[sta.peek().data]){
-                have[sta.peek().data]=1;
-                sta.pop();
+            else if(staRec.peek().record===rec[staRec.peek().data]){  //沒路
+               
+                have[staRec.peek().data]=1;
+         //       var item = sta.back();
+         //       item.record=0;
+                
+          //      have[tmp]=1;
+                //把9強制轉到2?  xxx
+             //   alert(sta.print());
+             //   alert('staRec: '+staRec.print());
+                if(sta.peek().data===9){
+                    staRec.pop();
+                    if(staRec.peek().data===2){
+                        sta.push(staRec.peek().data);
+                        list.push(new google.maps.Polyline({
+                        path:gragh[9][0].path,
+                        geodesic: true,
+                        strokeColor: '#A0A',
+                        strokeOpacity: 0.3,
+                        stokeWeight: 10,
+                        map:map
+                    }));
+                    }
+                }
+                else if(sta.peek().data!==9){
+                    staRec.pop();
+                    var tmp = staRec.peek().data;
+                    sta.push(tmp);
+                 //   list[list.length-1].setMap(null);
+                }
+                
+            //    alert('tmp: '+tmp);
+                alert(sta.print());
+            //    alert('staRec: '+staRec.print())
                 result.pop();
-                list[list.length-1].setMap(null);
+                
             }else{
-                var next = gragh[sta.peek().data][sta.peek().record].data;
-                var nextpath = gragh[sta.peek().data][sta.peek().record].path;
-                if(have[next]===0){
+                var next = gragh[staRec.peek().data][staRec.peek().record].data;
+             //   alert('next: '+next);
+                var nextpath = gragh[staRec.peek().data][staRec.peek().record].path;
+                if(have[next]===0 && sta.peek().data!==9){
                     sta.peek().addRecord();
                     sta.push(next);
+                    staRec.peek().addRecord();
+                    staRec.push(next);
                     result.push(nextpath);
                     have[next]=1;
                     list.push(new google.maps.Polyline({
@@ -595,35 +661,41 @@
                         map:map
                     }));
                 }else{
-                    sta.peek().addRecord();
+                    staRec.peek().addRecord();
                 }
             }
         }
         alert('done');
         
     }
-    function calculateAndDisplayRoute(gragh,gpath,map,rec,sta,have,result,list) {
+    //////////判斷當前的地點，接下來可走的地點，有沒有未走訪/////////////
+    function findVisited(){
+        
+    }
+          
+    //////////判斷當前的地點，接下來可走的地點，有沒有未走訪/////////////
+    function calculateAndDisplayRoute(gragh,gpath,map,rec,sta,have,result,list,staRec) {
         var start = document.getElementById('start').value;
         var end = document.getElementById('end').value;
             
             if(start=="24.324684, 120.685329"){
-                hamiltonian(sta,rec,gragh,have,rec,result,map,0,list);
+                hamiltonian(sta,rec,gragh,have,rec,result,map,0,list,staRec);
             }else if(start=="24.324400, 120.684654" ){ 
-                hamiltonian(sta,rec,gragh,have,rec,result,map,1,list);
+                hamiltonian(sta,rec,gragh,have,rec,result,map,1,list,staRec);
             }else if(start=="24.324534, 120.683086"){
-                hamiltonian(sta,rec,gragh,have,rec,result,map,2,list);
+                hamiltonian(sta,rec,gragh,have,rec,result,map,2,list,staRec);
             }else if(start=="24.325228, 120.683361"){
-                hamiltonian(sta,rec,gragh,have,rec,result,map,5,list);
+                hamiltonian(sta,rec,gragh,have,rec,result,map,5,list,staRec);
             }else if(start=="24.325755, 120.682412"){
-                hamiltonian(sta,rec,gragh,have,rec,result,map,16,list);
+                hamiltonian(sta,rec,gragh,have,rec,result,map,16,list,staRec);
             }else if(start=="24.325121, 120.682646"){
-                hamiltonian(sta,rec,gragh,have,rec,result,map,3,list);
+                hamiltonian(sta,rec,gragh,have,rec,result,map,3,list,staRec);
             }else if(start=="24.325816, 120.681529"){
-                hamiltonian(sta,rec,gragh,have,rec,result,map,6,list);
+                hamiltonian(sta,rec,gragh,have,rec,result,map,6,list,staRec);
             }else if(start=="24.324932, 120.681802"){
-                hamiltonian(sta,rec,gragh,have,rec,result,map,7,list);
+                hamiltonian(sta,rec,gragh,have,rec,result,map,7,list,staRec);
             }else if(start=="24.326326, 120.681507"){
-                hamiltonian(sta,rec,gragh,have,rec,result,map,12,list);
+                hamiltonian(sta,rec,gragh,have,rec,result,map,12,list,staRec);
             }
             
     
